@@ -13,6 +13,10 @@
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/Githubdownloader/app/src/main/res/menu/menu_bottom.xml" value="0.141015625" />
         <entry key="..\:/Users/Nikita/AndroidStudioProjects/Githubdownloader/app/src/main/res/menu/menu_main.xml" value="0.18802083333333333" />
         <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/activity_main.xml" value="0.36231884057971014" />
+        <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/fragment_download.xml" value="0.18958333333333333" />
+        <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/fragment_home.xml" value="0.26262626262626265" />
+        <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/item_repository.xml" value="0.365625" />
+        <entry key="..\:/project/Githubdownloader/app/src/main/res/menu/menu_bottom.xml" value="0.18958333333333333" />
       </map>
     </option>
   </component>

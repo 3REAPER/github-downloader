@@ -22,11 +22,21 @@ class MainActivity : AppCompatActivity() {
 
         val navigationBar = findViewById<BottomNavigationView>(R.id.navigation_bar)
         val navigationController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        var itemSelected = R.id.item_home
         navigationBar.setOnItemSelectedListener {
-                when(it.itemId){
-                    R.id.item_home -> navigationController.navigate(R.id.nav_homeFragment)
-                    R.id.item_download -> navigationController.navigate(R.id.nav_downloadFragment)
+            val itemWillSelected = it.itemId
+            if (itemSelected != itemWillSelected) {
+                when (itemWillSelected) {
+                    R.id.item_home -> {
+                        navigationController.navigate(R.id.nav_homeFragment)
+                        itemSelected = R.id.item_home
+                    }
+                    R.id.item_download -> {
+                        navigationController.navigate(R.id.nav_downloadFragment)
+                        itemSelected = R.id.item_download
+                    }
                 }
+            }
             true
             }
 

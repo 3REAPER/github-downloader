@@ -21,16 +21,14 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation_bar"
-        style="@style/AppTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="#FFFFFF"
-        app:itemIconTint="@color/cardview_dark_background"
+        android:isScrollContainer="false"
+        app:itemIconTint="@color/icons_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="parent"
-        android:isScrollContainer="false"
         app:menu="@menu/menu_bottom" />
 
 
