@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ru.pervukhin.githubdownloader.R
+import ru.pervukhin.githubdownloader.fragments.home.HomeViewModel
 
 class DownloadFragment : Fragment() {
 
@@ -21,7 +22,6 @@ class DownloadFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_download, container, false)
-
 
         return view
     }

@@ -2,4 +2,9 @@
     <string name="app_name">Github downloader</string>
 
     <string name="name">имя пользователя</string>
+    <string name="download">скачать</string>
+    <string name="not_found">пользователь не найден</string>
+    <string name="download_success">Файл установлен</string>
+    <string name="download_error">Что-то пошло не так</string>
+
 </resources>

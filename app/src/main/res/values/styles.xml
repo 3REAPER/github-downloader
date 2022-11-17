@@ -2,12 +2,15 @@
 <resources>
     <style name="AppTheme" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryDark">@color/background_color</item>
         <item name="android:windowBackground">@color/background_color</item>
     </style>
 
     <style name="NavigationBarTheme" parent="Theme.Material3.Dark.NoActionBar">
-        <item name="itemFillColor">@color/secondary_color</item>
-        <item name="colorSecondary">@color/primary_color</item>
-        <item name="android:windowBackground">@color/primary_color</item>
+        <item name="backgroundTint">@color/navigation_bar_color</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/back_ground_splash</item>
     </style>
 </resources>
