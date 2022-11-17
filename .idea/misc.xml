@@ -20,10 +20,11 @@
         <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/activity_main.xml" value="0.36231884057971014" />
         <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/activity_splash_screen.xml" value="0.36666666666666664" />
         <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/activity_splash_screen2.xml" value="0.36666666666666664" />
-        <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/fragment_download.xml" value="0.18958333333333333" />
+        <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/fragment_download.xml" value="0.33" />
         <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/fragment_first.xml" value="0.36666666666666664" />
         <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/fragment_home.xml" value="0.26262626262626265" />
         <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/fragment_repository.xml" value="0.33" />
+        <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/item_download.xml" value="0.36666666666666664" />
         <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/item_repositoru_cardview.xml" value="0.36666666666666664" />
         <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/item_repository.xml" value="0.365625" />
         <entry key="..\:/project/Githubdownloader/app/src/main/res/layout/item_repository_cardview.xml" value="0.36666666666666664" />

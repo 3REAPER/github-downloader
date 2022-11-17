@@ -20,12 +20,13 @@
 
             <TextView
                 android:id="@+id/name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="name"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textColor="@color/background_color"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,18 +64,19 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
 
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
                     android:layout_gravity="end"
+                    android:layout_marginEnd="8dp"
                     android:orientation="vertical">
 
                     <ImageView
@@ -100,34 +102,34 @@
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/ic_eye"/>
+                        android:src="@drawable/ic_eye" />
 
                     <TextView
                         android:id="@+id/watchers"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAlignment="center"
                         android:text="47"
+                        android:textAlignment="center"
                         android:textColor="@color/primary_color" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginEnd="8dp">
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/ic_fork"/>
+                        android:src="@drawable/ic_fork" />
 
                     <TextView
                         android:id="@+id/forks"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAlignment="center"
                         android:text="7"
+                        android:textAlignment="center"
                         android:textColor="@color/primary_color" />
                 </LinearLayout>
 

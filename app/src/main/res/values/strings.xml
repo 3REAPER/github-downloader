@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">Github downloader</string>
 
-    <string name="name">имя пользователя</string>
-    <string name="download">скачать</string>
-    <string name="not_found">пользователь не найден</string>
+    <string name="name">Имя пользователя</string>
+    <string name="download">Скачать</string>
+    <string name="not_found">Пользователь не найден</string>
     <string name="download_success">Файл установлен</string>
     <string name="download_error">Что-то пошло не так</string>
+    <string name="file_exists">Такой файл уже сущесвует</string>
+    <string name="was_download">Вы уже скачивали этот файл</string>
 
 </resources>

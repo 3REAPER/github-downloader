@@ -1,11 +1,10 @@
-package ru.pervukhin.githubdownloader.data
+package ru.pervukhin.githubdownloader.data.retrofit
 
 import okhttp3.ResponseBody
 import retrofit2.Response
-import ru.pervukhin.githubdownloader.data.RetrofitInstance
 import ru.pervukhin.githubdownloader.domain.Repository
 
-class Service {
+class RetrofitService {
 
     suspend fun getRepositoryByUser(user: String): Response<List<Repository>>{
             return RetrofitInstance.gitApi.getRepositoryByUser(user)

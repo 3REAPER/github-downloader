@@ -1,4 +1,4 @@
-package ru.pervukhin.githubdownloader.data
+package ru.pervukhin.githubdownloader.data.retrofit
 
 import okhttp3.ResponseBody
 import retrofit2.Response

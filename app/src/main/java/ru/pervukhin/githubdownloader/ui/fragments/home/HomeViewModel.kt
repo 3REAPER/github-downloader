@@ -1,4 +1,4 @@
-package ru.pervukhin.githubdownloader.fragments.home
+package ru.pervukhin.githubdownloader.ui.fragments.home
 
 import android.os.Environment
 import android.util.Log
@@ -8,14 +8,14 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
-import ru.pervukhin.githubdownloader.data.Service
+import ru.pervukhin.githubdownloader.data.retrofit.RetrofitService
 import ru.pervukhin.githubdownloader.domain.Repository
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 
 class HomeViewModel : ViewModel() {
-    private val service = Service()
+    private val service = RetrofitService()
     val listRepositoryLiveData : MutableLiveData<List<Repository>> = MutableLiveData()
     val zipLiveData : MutableLiveData<String> = MutableLiveData()
 
@@ -28,13 +28,26 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun download(owner: String, name: String){
+    fun download(repository: Repository){
         viewModelScope.launch{
-            val response = service.downloadZip("https://github.com/$owner/$name/archive/refs/heads/main.zip")
-            response.body()?.let {
-                launch(Dispatchers.IO){
-                   saveFile(it, Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + File.separator + "$name.zip")
+            val response = service.downloadZip("https://github.com/${repository.owner.login}/${repository.name}/archive/refs/heads/${repository.defaultBranch}.zip")
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    launch(Dispatchers.IO) {
+                        var condition = saveFile(it,
+                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + File.separator + "${repository.name}.zip"
+                        )
+                        launch(Dispatchers.Main){
+                            if (condition == "Success"){
+                                condition = "Success.${repository.name}.${repository.owner.login}"
+                            }
+                            zipLiveData.value = condition
+                        }
+
+                    }
                 }
+            }else{
+                zipLiveData.value = "Error"
             }
 
 
@@ -42,12 +55,14 @@ class HomeViewModel : ViewModel() {
     }
 
 
-    private fun saveFile(body: ResponseBody, pathWhereYouWantToSaveFile: String): String {
+    private fun saveFile(body: ResponseBody, path: String): String {
         var input: InputStream? = null
         try {
             input = body.byteStream()
-            //val file = File(getCacheDir(), "cacheFileAppeal.srl")
-            val fos = FileOutputStream(pathWhereYouWantToSaveFile)
+            if (File(path).exists()){
+                return "Such file exists"
+            }
+            val fos = FileOutputStream(path)
             fos.use { output ->
                 val buffer = ByteArray(4 * 1024)
                 var read: Int

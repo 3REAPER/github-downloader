@@ -1,14 +1,11 @@
-package ru.pervukhin.githubdownloader.adapter
+package ru.pervukhin.githubdownloader.ui.adapter
 
-import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
-import org.w3c.dom.ls.LSException
 import ru.pervukhin.githubdownloader.R
 import ru.pervukhin.githubdownloader.domain.Repository
 
@@ -37,7 +34,7 @@ class RepositoryFindAdapter(private val repositoryClick: RepositoryClick) : Recy
 
 
         val repository = list[position]
-        name.text = repository.name
+        name.text = repository.name.replace("_"," ")
         description.text = repository.description
         if (repository.language == null){
                repository.language = "Markdown"

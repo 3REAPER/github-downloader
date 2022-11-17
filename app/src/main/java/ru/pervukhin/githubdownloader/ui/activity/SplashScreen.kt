@@ -1,4 +1,4 @@
-package ru.pervukhin.githubdownloader
+package ru.pervukhin.githubdownloader.ui.activity
 
 import android.content.Intent
 import android.os.Bundle

@@ -6,12 +6,12 @@
     app:startDestination="@id/nav_homeFragment">
     <fragment
         android:id="@+id/nav_homeFragment"
-        android:name="ru.pervukhin.githubdownloader.fragments.home.HomeFragment"
+        android:name="ru.pervukhin.githubdownloader.ui.fragments.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/nav_downloadFragment"
-        android:name="ru.pervukhin.githubdownloader.fragments.download.DownloadFragment"
+        android:name="ru.pervukhin.githubdownloader.ui.fragments.download.DownloadFragment"
         android:label="fragment_download"
         tools:layout="@layout/fragment_download" />
 </navigation>

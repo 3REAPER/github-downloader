@@ -1,4 +1,4 @@
-package ru.pervukhin.githubdownloader.data
+package ru.pervukhin.githubdownloader.data.retrofit
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

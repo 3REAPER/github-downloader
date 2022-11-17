@@ -1,21 +1,13 @@
-package ru.pervukhin.githubdownloader
+package ru.pervukhin.githubdownloader.ui.activity
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import androidx.core.app.ActivityCompat
-import androidx.core.view.get
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import ru.pervukhin.githubdownloader.databinding.ActivityMainBinding
+import ru.pervukhin.githubdownloader.R
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navigationController: NavController
@@ -31,9 +23,7 @@ class MainActivity : AppCompatActivity() {
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             val permissions = arrayOf(
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                android.Manifest.permission.MANAGE_EXTERNAL_STORAGE,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
             )
             ActivityCompat.requestPermissions(this, permissions, 0)
         }
@@ -55,5 +45,9 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+    }
+
+    override fun onBackPressed() {
+
     }
 }
