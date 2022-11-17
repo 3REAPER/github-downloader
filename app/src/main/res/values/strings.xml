@@ -8,5 +8,6 @@
     <string name="download_error">Что-то пошло не так</string>
     <string name="file_exists">Такой файл уже сущесвует</string>
     <string name="was_download">Вы уже скачивали этот файл</string>
+    <string name="internet">Нет подключения к интернету</string>
 
 </resources>

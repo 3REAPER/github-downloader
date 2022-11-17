@@ -1,6 +1,9 @@
 package ru.pervukhin.githubdownloader.ui.fragments.home
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
@@ -47,7 +51,11 @@ class HomeFragment : Fragment(), RepositoryFindAdapter.RepositoryClick {
         recyclerView.adapter = adapter
 
         nameLayout.setEndIconOnClickListener {
-            viewModel.search(name.text.toString())
+            if(isNetworkAvailable(requireContext())) {
+                viewModel.search(name.text.toString())
+            }else{
+                Toast.makeText(context,R.string.internet,Toast.LENGTH_SHORT).show()
+            }
         }
 
         viewModel.listRepositoryLiveData.observe(viewLifecycleOwner) { list ->
@@ -74,6 +82,29 @@ class HomeFragment : Fragment(), RepositoryFindAdapter.RepositoryClick {
         }
 
         return view
+    }
+
+    fun isNetworkAvailable(context: Context): Boolean {
+        val connectivity = context
+            .getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivity == null) {
+            return false
+        }
+
+        // get network info for all of the data interfaces (e.g. WiFi, 3G, LTE, etc.)
+        val info = connectivity.allNetworkInfo
+
+        // make sure that there is at least one interface to test against
+        if (info != null) {
+            // iterate through the interfaces
+            for (i in info.indices) {
+                // check this interface for a connected state
+                if (info[i].state == NetworkInfo.State.CONNECTED) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
     private fun saveData(name: String, owner: String) {
