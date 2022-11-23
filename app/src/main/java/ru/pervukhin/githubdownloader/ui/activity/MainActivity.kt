@@ -1,6 +1,9 @@
 package ru.pervukhin.githubdownloader.ui.activity
 
+import android.content.Context
 import android.content.pm.PackageManager
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -45,6 +48,23 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+    }
+
+    fun isNetworkAvailable(context: Context): Boolean {
+        val connectivity = context
+            .getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivity == null) {
+            return false
+        }
+        val info = connectivity.allNetworkInfo
+        if (info != null) {
+            for (i in info.indices) {
+                if (info[i].state == NetworkInfo.State.CONNECTED) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
     override fun onBackPressed() {

@@ -33,25 +33,21 @@ class HomeFragment : Fragment(), RepositoryFindAdapter.RepositoryClick {
     private val viewModel by lazy {
         ViewModelProvider(this).get(HomeViewModel::class.java)
     }
-    private lateinit var mainActivity: MainActivity
-    private lateinit var adapter: RepositoryFindAdapter
-    private lateinit var service: RepositoryDao
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mainActivity = activity as MainActivity
-        service = context?.let { AppDataBase.getDatabase(it).repositoryDao() }!!
+        val mainActivity = activity as MainActivity
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         val name = view.findViewById<TextInputEditText>(R.id.name)
         val nameLayout = view.findViewById<TextInputLayout>(R.id.name_field)
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_repository)
-        adapter = RepositoryFindAdapter(this)
+        val adapter = RepositoryFindAdapter(this)
         recyclerView.adapter = adapter
 
         nameLayout.setEndIconOnClickListener {
-            if(isNetworkAvailable(requireContext())) {
+            if(mainActivity.isNetworkAvailable(requireContext())) {
                 viewModel.search(name.text.toString())
             }else{
                 Toast.makeText(context,R.string.internet,Toast.LENGTH_SHORT).show()
@@ -84,33 +80,11 @@ class HomeFragment : Fragment(), RepositoryFindAdapter.RepositoryClick {
         return view
     }
 
-    fun isNetworkAvailable(context: Context): Boolean {
-        val connectivity = context
-            .getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (connectivity == null) {
-            return false
-        }
-
-        // get network info for all of the data interfaces (e.g. WiFi, 3G, LTE, etc.)
-        val info = connectivity.allNetworkInfo
-
-        // make sure that there is at least one interface to test against
-        if (info != null) {
-            // iterate through the interfaces
-            for (i in info.indices) {
-                // check this interface for a connected state
-                if (info[i].state == NetworkInfo.State.CONNECTED) {
-                    return true
-                }
-            }
-        }
-        return false
-    }
-
     private fun saveData(name: String, owner: String) {
         runBlocking {
             launch(Dispatchers.IO) {
                 context?.let {
+                    val service = context?.let { AppDataBase.getDatabase(it).repositoryDao() }!!
                     if (service.getByNameAndOwner(name,owner).isEmpty()) {
                         service.insert(
                             RepositoryDataBase(
