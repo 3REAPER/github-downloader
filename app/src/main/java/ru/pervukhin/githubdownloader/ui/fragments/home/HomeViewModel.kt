@@ -8,23 +8,31 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
+import ru.pervukhin.githubdownloader.App
 import ru.pervukhin.githubdownloader.data.retrofit.RetrofitService
+import ru.pervukhin.githubdownloader.data.room.RepositoryDao
+import ru.pervukhin.githubdownloader.data.room.RepositoryDataBase
 import ru.pervukhin.githubdownloader.domain.Repository
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
+import javax.inject.Inject
 
 class HomeViewModel : ViewModel() {
     private val service = RetrofitService()
     val listRepositoryLiveData : MutableLiveData<List<Repository>> = MutableLiveData()
     val zipLiveData : MutableLiveData<String> = MutableLiveData()
 
+    @Inject
+    lateinit var repositoryDao: RepositoryDao
+    init {
+        App.appComponent.inject(this)
+    }
+
     fun search(name: String) {
 
         viewModelScope.launch {
             listRepositoryLiveData.value = service.getRepositoryByUser(name).body()
-
-
         }
     }
 
@@ -37,10 +45,10 @@ class HomeViewModel : ViewModel() {
                         var condition = saveFile(it,
                             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + File.separator + "${repository.name}.zip"
                         )
+                        if (condition=="Success"){
+                            repositoryDao.insert(RepositoryDataBase(0,repository.name, repository.owner.login))
+                        }
                         launch(Dispatchers.Main){
-                            if (condition == "Success"){
-                                condition = "Success.${repository.name}.${repository.owner.login}"
-                            }
                             zipLiveData.value = condition
                         }
 

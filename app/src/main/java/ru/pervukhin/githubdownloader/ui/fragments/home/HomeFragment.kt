@@ -73,50 +73,20 @@ class HomeFragment : Fragment(), RepositoryFindAdapter.RepositoryClick {
         }
 
         viewModel.zipLiveData.observe(viewLifecycleOwner) {
-            if (it.contains("Success")) {
-                val condition = it.split(".")
-                Toast.makeText(context, R.string.download_success, Toast.LENGTH_SHORT).show()
-                saveData(condition[1], condition[2])
-            }
-
             when (it) {
+                "Success" -> Toast.makeText(context, R.string.download_success, Toast.LENGTH_SHORT).show()
                 "Error" -> Toast.makeText(context, R.string.download_error, Toast.LENGTH_SHORT).show()
                 "Such file exists" -> Toast.makeText(context, R.string.file_exists, Toast.LENGTH_SHORT).show()
-
             }
-
         }
 
         return view
-    }
-
-    private fun saveData(name: String, owner: String) {
-        runBlocking {
-            launch(Dispatchers.IO) {
-
-                val service = repositoryDao
-                if (service != null) {
-                    if (service.getByNameAndOwner(name, owner).isEmpty()) {
-                        service.insert(
-                            RepositoryDataBase(
-                                0,
-                                name,
-                                owner
-                            )
-                        )
-                    }
-                }
-            }
-        }
     }
 
     override fun onClickDownload(view: View, repository: Repository) {
         viewModel.download(repository)
 
     }
-
-
-
 
     override fun onClickShare(view: View, repository: Repository) {
         val callIntent: Intent = Uri.parse("https://github.com/${repository.owner.login}/${repository.name}").let { uri ->

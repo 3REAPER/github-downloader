@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.pervukhin.githubdownloader.App
-import ru.pervukhin.githubdownloader.data.room.AppDataBase
+import ru.pervukhin.githubdownloader.data.room.RepositoryDao
 import ru.pervukhin.githubdownloader.data.room.RepositoryDataBase
 import javax.inject.Inject
 
@@ -14,7 +14,7 @@ class DownloadViewModel() : ViewModel() {
     val repositoryLiveData : MutableLiveData<List<RepositoryDataBase>> = MutableLiveData()
 
     @Inject
-    lateinit var roomDataBase: AppDataBase
+    lateinit var repositoryDao: RepositoryDao
     init {
         App.appComponent.inject(this)
     }
@@ -22,7 +22,7 @@ class DownloadViewModel() : ViewModel() {
 
     fun getAll(){
         viewModelScope.launch(Dispatchers.IO) {
-            val data = roomDataBase.repositoryDao().getAll()
+            val data = repositoryDao.getAll()
             launch(Dispatchers.Main){
                 repositoryLiveData.value = data
             }

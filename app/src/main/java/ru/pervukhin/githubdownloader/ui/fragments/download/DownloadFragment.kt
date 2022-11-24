@@ -22,7 +22,6 @@ class DownloadFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_download, container, false)
-        viewModel.roomDataBase = context?.let { AppDataBase.getDatabase(it) }!!
         val adapter = DownloadAdapter()
         val downloadRecycler = view.findViewById<RecyclerView>(R.id.rv_download)
         downloadRecycler.adapter = adapter

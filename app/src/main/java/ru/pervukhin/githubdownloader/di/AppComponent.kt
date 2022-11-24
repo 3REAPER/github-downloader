@@ -10,6 +10,7 @@ import ru.pervukhin.githubdownloader.data.room.RepositoryDao
 import ru.pervukhin.githubdownloader.ui.activity.MainActivity
 import ru.pervukhin.githubdownloader.ui.fragments.download.DownloadViewModel
 import ru.pervukhin.githubdownloader.ui.fragments.home.HomeFragment
+import ru.pervukhin.githubdownloader.ui.fragments.home.HomeViewModel
 import javax.inject.Singleton
 
 
@@ -19,6 +20,7 @@ interface AppComponent {
 
     fun inject(mainActivity: MainActivity)
     fun inject(homeFragment: HomeFragment)
+    fun inject(homeViewModel: HomeViewModel)
     fun inject(downloadViewModel: DownloadViewModel)
 
     fun gitApi(): GitApi
